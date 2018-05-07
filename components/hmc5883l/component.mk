@@ -1,0 +1,1 @@
+COMPONENT_NAME = hmc5883l
