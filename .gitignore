@@ -2,4 +2,4 @@
 *.d
 *.o
 *.old
-.DS_Store
+.DS_Store.DS_Store
