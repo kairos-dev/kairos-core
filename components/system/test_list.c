@@ -28,11 +28,13 @@ void test_list(void){
 
 	list_t lista;
     list_init(&lista);
-
-    list_add(&lista, "Bom dia");
-    list_add(&lista, "todo");
-    list_add(&lista, "o");
-    list_add(&lista, "Mundo");
+    list_append(&lista, "Bom dia");
+    list_append(&lista, "todo");
+    list_append(&lista, "o");
+    list_append(&lista, "Mundo");
+    list_insert(&lista, 3, "inserido no meio");
+    list_pop(&lista);
+    // list_delete(&lista, 4);
 
     for (i = 0; i < list_total(&lista); i++)
         printf("%s ", (char *) list_get(&lista, i));

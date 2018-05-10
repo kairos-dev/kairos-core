@@ -3,3 +3,5 @@
 *.o
 *.old
 .DS_Store
+sdkconfig
+sdkconfig.old
