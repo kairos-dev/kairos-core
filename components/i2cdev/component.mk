@@ -1,1 +1,0 @@
-COMPONENT_NAME = i2cdev
