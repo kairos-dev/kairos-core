@@ -1,10 +1,10 @@
 #ifndef LIST_H
 #define LIST_H
 
-#define LIST_INIT_CAPACITY 4
+#define LIST_INIT_CAPACITY 4 
 
 #define LIST_INIT(list) list_t list; list_init(&list)
-#define LIST_ADD(list, item) list_append(&list, (void *) item)
+#define LIST_APPEND(list, item) list_append(&list, (void *) item)
 #define LIST_SET(list, id, item) list_set(&list, id, (void *) item)
 #define LIST_GET(list, type, id) (type) list_get(&list, id)
 #define LIST_DELETE(list, id) list_delete(&list, id)
@@ -20,7 +20,7 @@ typedef struct vector {
 } list_t;
 
 void list_init(list_t *);
-int list_total(list_t *);
+int  list_total(list_t *);
 void list_resize(list_t *, int);
 void list_append(list_t *, void *);
 void list_insert(list_t *, int, void *);

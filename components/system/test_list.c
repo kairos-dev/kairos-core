@@ -8,12 +8,12 @@ void test_list(void){
 
     LIST_INIT(v);
 
-    LIST_ADD(v, 1);
-    LIST_ADD(v, 2);
-    LIST_ADD(v, 3);
-    LIST_ADD(v, 4);
-    LIST_ADD(v, 2);
-    LIST_ADD(v, 1);
+    LIST_APPEND(v, 1);
+    LIST_APPEND(v, 2);
+    LIST_APPEND(v, 3);
+    LIST_APPEND(v, 4);
+    LIST_APPEND(v, 2);
+    LIST_APPEND(v, 1);
 
     for (i = 0; i < LIST_TOTAL(v); i++)
         printf("%d ", LIST_GET(v, int, i));
@@ -45,17 +45,17 @@ void test_list(void){
     data_t aux_data1 = {
     	.data = 10
     };
-    LIST_ADD(value, &aux_data1);
+    LIST_APPEND(value, &aux_data1);
 
     data_t aux_data2 = {
     	.data = 15
     };
-    LIST_ADD(value, &aux_data2);
+    LIST_APPEND(value, &aux_data2);
 
     data_t aux_data3 = {
     	.data = 20
     };
-    LIST_ADD(value, &aux_data3);
+    LIST_APPEND(value, &aux_data3);
 
 
     data_t *aux;
