@@ -16,6 +16,7 @@ void test_list(void){
     LIST_APPEND(v, 1);
 
     for (i = 0; i < LIST_TOTAL(v); i++)
+    for (i = 0; i < LIST_LENGTH(v); i++)
         printf("%d ", LIST_GET(v, int, i));
     printf("\n");
 
@@ -23,6 +24,7 @@ void test_list(void){
     LIST_DELETE(v, 1);
 
     for (i = 0; i < LIST_TOTAL(v); i++)
+    for (i = 0; i < LIST_LENGTH(v); i++)
         printf("%d ", LIST_GET(v, int, i));
     printf("\n");
 
@@ -37,6 +39,7 @@ void test_list(void){
     // list_delete(&lista, 4);
 
     for (i = 0; i < list_total(&lista); i++)
+    for (i = 0; i < list_length(&lista); i++)
         printf("%s ", (char *) list_get(&lista, i));
     printf("\n");
 
@@ -60,6 +63,7 @@ void test_list(void){
 
     data_t *aux;
     for (i = 0; i < LIST_TOTAL(value); i++){
+    for (i = 0; i < LIST_LENGTH(value); i++){
     	aux = LIST_GET(value, data_t*, i);
     	printf("%d\n", aux->data);
     }

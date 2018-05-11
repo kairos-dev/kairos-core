@@ -10,6 +10,7 @@
 #define LIST_DELETE(list, id) list_delete(&list, id)
 #define LIST_POP(list) list_pop(&list)
 #define LIST_TOTAL(list) list_total(&list)
+#define LIST_LENGTH(list) list_length(&list)
 #define LIST_FREE(list) list_free(&list)
 #define LIST_INSERT(list, id, item) list_insert(&list, id, (void *) item)
 
@@ -21,6 +22,7 @@ typedef struct vector {
 
 void list_init(list_t *);
 int  list_total(list_t *);
+int  list_length(list_t *);
 void list_resize(list_t *, int);
 void list_append(list_t *, void *);
 void list_insert(list_t *, int, void *);
