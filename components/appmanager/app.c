@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-app_t app_create(char *appname, appversion_t app_version, void *on_init, void *on_close){
-	app_t aux_app;
-	strncpy(aux_app.name, appname, APP_NAME_BYTES);
-	aux_app.app_version = app_version;
-	aux_app.on_init = on_init;
-	aux_app.on_close = on_close;
+app_t *app_create(char *appname, appversion_t app_version, void *on_init, void *on_close){
+	app_t *aux_app = calloc(1, sizeof(app_t));
+	strncpy((*aux_app).name, appname, APP_NAME_BYTES);
+	(*aux_app).app_version = app_version;
+	(*aux_app).on_init = on_init;
+	(*aux_app).on_close = on_close;
 	return aux_app;
 }
 

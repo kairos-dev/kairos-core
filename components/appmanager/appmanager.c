@@ -25,3 +25,7 @@ app_t *appmanager_get_app_by_name(char *appname){
     return NULL;
 }
 
+app_t *appmanager_get_manifest(void){
+	return app_manifest_head;
+}
+

@@ -32,7 +32,7 @@ struct app_t{
 
 typedef struct app_t app_t;
 
-app_t app_create(char *appname, appversion_t app_version, void *on_init, void *on_close);
+app_t *app_create(char *appname, appversion_t app_version, void *on_init, void *on_close);
 
 kairos_err_t app_set_functions(app_t *app, app_functions functions);
 

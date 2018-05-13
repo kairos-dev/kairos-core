@@ -10,7 +10,6 @@ void list_init(list_t *v)
     v->items = malloc(sizeof(void *) * v->capacity);
 }
 
-int list_total(list_t *v)
 int list_length(list_t *v)
 {
     return v->total;
