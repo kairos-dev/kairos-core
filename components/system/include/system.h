@@ -2,8 +2,7 @@
 #define SYSTEM_H_ 
 
 #include <stdint.h>
-#include <list.h>
-
+#include <dynamic_list.h>
 #define KAIROS_ERR_FAIL 	0
 #define KAIROS_ERR_OK 		1
 

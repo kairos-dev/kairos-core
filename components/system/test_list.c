@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <list.h>
+#include <dynamic_list.h>
 #include <test_list.h>
 
 void test_list(void){

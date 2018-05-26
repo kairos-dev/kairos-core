@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "list.h"
+#include "dynamic_list.h"
 
 void list_init(list_t *v)
 {

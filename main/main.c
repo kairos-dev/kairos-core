@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <list.h>
+#include <dynamic_list.h>
 #include <appmanager.h>
 #include <app.h>
 #include <system.h>
 #include <menu.h>
+#include <linked_list.h>
 
 void bluetooth_test1(void *aux){
 	app_t *app = (app_t*)aux;
@@ -27,8 +28,6 @@ void _on_close(void *aux){
 }
 
 void test_apps(void){
-	// app_t *teste = app_create("Teste", (appversion_t){.release = 1, .func_added = 0, .bug_fixed=3}, _on_init, _on_close);
-
 	appmanager_add_to_manifest(app_create("Test 1", (appversion_t){.release = 1, .func_added = 0, .bug_fixed=3}, _on_init, _on_close));
 	appmanager_add_to_manifest(app_create("Test 2", (appversion_t){.release = 2, .func_added = 0, .bug_fixed=4}, _on_init, _on_close));
 	appmanager_add_to_manifest(app_create("Test 3", (appversion_t){.release = 3, .func_added = 1, .bug_fixed=5}, _on_init, _on_close));
@@ -52,4 +51,18 @@ void app_main(void){
 		app_t *aux = LIST_GET(main_menu, app_t*, index);
 		(*aux).on_init(aux);
 	}
+
+	linked_list_t *main_list = NULL;
+	
+	linked_list_init(&main_list);
+	linked_list_insert(&main_list, app_create("Test 3", (appversion_t){.release = 1, .func_added = 0, .bug_fixed=3}, _on_init, _on_close));
+	linked_list_insert(&main_list, app_create("Test 4", (appversion_t){.release = 2, .func_added = 0, .bug_fixed=4}, _on_init, _on_close));
+	
+	linked_list_t *temp = main_list;
+	if(temp == NULL)	printf("\nLista Vazia!\n");
+	while(temp != NULL){
+		app_t *aux = (app_t*)temp->data;
+		(*aux).on_init(aux);
+        temp = temp->next;         
+    }
 }
