@@ -6,6 +6,7 @@
 #include <system.h>
 #include <menu.h>
 #include <linked_list.h>
+#include <circ_linked_list.h>
 
 void bluetooth_test1(void *aux){
 	app_t *app = (app_t*)aux;
@@ -42,6 +43,14 @@ void test_apps(void){
 	}
 }
 
+void print_sth(circ_linked_list_t *node){
+    printf("%d\t", (int)node->data);
+    node = node->next;
+    printf("%d\t", (int)node->data);
+    node = node->prev;
+    printf("%d\t", (int)node->data);
+}
+
 void app_main(void){
 	list_t main_menu;
 	list_init(&main_menu);
@@ -65,4 +74,18 @@ void app_main(void){
 		(*aux).on_init(aux);
         temp = temp->next;         
     }
+
+	circ_linked_list_t *head = NULL;
+	
+	CLL_insert_begin(&head, (void*)1); Print(&head); ReversePrint(&head);
+	CLL_insert_begin(&head, (void*)7); Print(&head); ReversePrint(&head);
+	CLL_insert_end(&head, (void*)9); Print(&head); ReversePrint(&head);
+	Print(&head);
+	printf("Actual: %d\n", (int)head->data);
+	printf("GET_NEXT(): %d\n", (int)CLL_get_next(&head));
+	printf("GET_NEXT(): %d\n", (int)CLL_get_next(&head));
+	printf("GET_NEXT(): %d\n", (int)CLL_get_next(&head));
+	printf("Actual: %d\n", (int)head->data);
+	printf("GET_PREVIOUS(): %d\n", (int)CLL_get_previous(&head));
+	printf("GET_PREVIOUS(): %d\n", (int)CLL_get_previous(&head));
 }
