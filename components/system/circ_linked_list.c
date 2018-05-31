@@ -48,7 +48,7 @@ void* CLL_get_previous(circ_linked_list_t **head){
     circ_linked_list_t *temp = (*head);
     if((*head)->prev == NULL) return NULL;
     (*head) = (*head)->prev;
-    (*head)->prev = temp;
+    (*head)->next = temp;
     return (*head)->data;
 }
 

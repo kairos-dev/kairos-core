@@ -21,8 +21,12 @@ void* CLL_get_previous(circ_linked_list_t **head);
 
 void* CLL_get_actual(circ_linked_list_t **head);
 
-void Print(circ_linked_list_t **head) ;
 
-void ReversePrint(circ_linked_list_t **head) ;
+// void linked_list_init(linked_list_t **list);
+// kairos_err_t linked_list_is_empty(linked_list_t **list);
+// kairos_err_t linked_list_append(linked_list_t **list, void *data);
+// kairos_err_t linked_list_insert(linked_list_t **list, void *data);
+// kairos_err_t linked_list_pop(linked_list_t **list);
+// kairos_err_t linked_list_remove(linked_list_t **list);
 
 #endif
