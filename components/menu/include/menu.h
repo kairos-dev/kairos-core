@@ -3,14 +3,19 @@
 
 #include <stdint.h>
 #include <app.h>
+#include <appmanager.h>
+#include <circular_linked_list.h>
 
-struct menuitem_t{
-	char text[APP_NAME_BYTES];
-	char sub_stext[APP_NAME_BYTES];
-	app_t app;
-	uint16_t image_logo;
-};
+typedef circ_list_t menu_t;
 
-typedef struct menuitem_t menuitem_t;
+menu_t* main_menu, *app_menu, *sub_menu;
+
+menu_t* create_main_menu(app_manifest_t *manifest);
+
+void* menu_next_item(menu_t *menu);
+
+void* menu_previous_item(menu_t *menu);
+
+void* menu_get_selected(menu_t *menu);
 
 #endif

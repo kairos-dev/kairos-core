@@ -1,6 +1,6 @@
 
-#ifndef __LL_H
-#define __LL_H
+#ifndef _LINKED_LIST_H_
+#define _LINKED_LIST_H_
 
 #include <stddef.h>
 

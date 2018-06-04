@@ -1,13 +1,14 @@
-#ifndef APPMANAGER_H
-#define APPMANAGER_H
+#ifndef _APPMANAGER_H_
+#define _APPMANAGER_H_
 
-#include<app.h>
-#include<system.h>
 #include<stdlib.h>
+#include<app.h>
+#include <circular_linked_list.h>
+#include<system.h>
 
-typedef list_t app_manifest_t;
+typedef circ_list_t app_manifest_t;
 
-app_t *app_manifest_head;
+app_manifest_t *app_manifest;
 
 void appmanager_app_loader_init();
 

@@ -4,15 +4,15 @@ Library highly based on "circular-linked-list" from HQarroum and these tutorials
 * https://br.ccm.net/faq/10226-listas-circulares-ring-buffer#lista-circ-c
 * https://pt.wikibooks.org/wiki/Programar_em_C/Listas_encadeadas#Lista_encadeada_linear
 */
-#include <CLL.h>
+#include <circular_linked_list.h>
 
 /**
- * @brief Creates a new instance of a `list_t`.
+ * @brief Creates a new instance of a `circ_list_t`.
  * @return a pointer to the created list.
  */
-list_t*	cll_create()
+circ_list_t*	cll_create()
 {
-  list_t*	list;
+  circ_list_t*	list;
     
   list = malloc(sizeof(*list));
   list->size = 0;
@@ -25,11 +25,11 @@ list_t*	cll_create()
  * @brief Same as `list_create` except no dynamic
  * allocation on the heap will be perform to create
  * the list.
- * @return a list_t value
+ * @return a circ_list_t value
  */
-list_t cll_create_static()
+circ_list_t cll_create_static()
 {
-  return ((list_t) {
+  return ((circ_list_t) {
       .size = 0,
       .head = NULL,
       .tail = NULL
@@ -40,7 +40,7 @@ list_t cll_create_static()
  * @brief Clears the list by deleting every node in it.
  * The list will still be usable after this call.
  */
-void	cll_clear(list_t* list)
+void	cll_clear(circ_list_t* list)
 {
   node_t* node = list->head;
   
@@ -57,7 +57,7 @@ void	cll_clear(list_t* list)
  * frees the memory allocated by the `list`. The given pointer
  * will not be usable after a call to this function.
  */
-void	cll_destroy(list_t* list)
+void	cll_destroy(circ_list_t* list)
 {
   cll_clear(list);
   free(list);
@@ -68,7 +68,7 @@ void	cll_destroy(list_t* list)
  * @brief Searches the list for the given `node`.
  * @return the found node if any, NULL otherwise.
  */
-node_t*	cll_find_node(const list_t* list, const node_t* element)
+node_t*	cll_find_node(const circ_list_t* list, const node_t* element)
 {
   node_t* node = list->head;
   
@@ -85,7 +85,7 @@ node_t*	cll_find_node(const list_t* list, const node_t* element)
  * @return the size of the given `list`. That is, the number of nodes currently
  * held by the list.
  */
-size_t	cll_get_size(const list_t* list)
+size_t	cll_get_size(const circ_list_t* list)
 {
   return (list->size);
 }
@@ -94,7 +94,7 @@ size_t	cll_get_size(const list_t* list)
  * @return a positive value if the given `list` is
  * empty, zero otherwise.
  */
-int	cll_is_empty(const list_t* list)
+int	cll_is_empty(const circ_list_t* list)
 {
   return (cll_get_size(list) == 0);
 }
@@ -121,7 +121,7 @@ node_t* cll_new_node(void* element)
  * given `list`.
  * @return a pointer to the newly created node.
  */
-node_t*	cll_push_front(list_t* list, void* element)
+node_t*	cll_push_front(circ_list_t* list, void* element)
 {
   node_t* node = cll_new_node(element);
   node_t* head = list->head;
@@ -149,7 +149,7 @@ node_t*	cll_push_front(list_t* list, void* element)
  * given `list`.
  * @return a pointer to the newly created node.
  */
-node_t*	cll_push_back(list_t* list, void* element)
+node_t*	cll_push_back(circ_list_t* list, void* element)
 {
   node_t* node = cll_new_node(element);
   node_t* tail = list->tail;
@@ -176,7 +176,7 @@ node_t*	cll_push_back(list_t* list, void* element)
  * from the list.
  * @return the pointer held by the removed node.
  */
-void* cll_pop_node(list_t* list, node_t* node)
+void* cll_pop_node(circ_list_t* list, node_t* node)
 {
   void* element;
   
@@ -192,7 +192,7 @@ void* cll_pop_node(list_t* list, node_t* node)
  * @brief Removes the node located at the head of the list.
  * @return the pointer held by the removed node.
  */
-void* cll_pop_back(list_t* list)
+void* cll_pop_back(circ_list_t* list)
 {
   return (cll_pop_node(list, list->tail));
 }
@@ -201,27 +201,27 @@ void* cll_pop_back(list_t* list)
  * @brief Removes the node located at the tail of the list.
  * @return the pointer held by the removed node.
  */
-void* cll_pop_front(list_t* list)
+void* cll_pop_front(circ_list_t* list)
 {
   return (cll_pop_node(list, list->head));
 }
 
-node_t* cll_get_next(list_t* list)
+node_t* cll_get_next(circ_list_t* list)
 {
     return(list->head = list->head->next);
 }
 
-node_t* cll_get_previous(list_t* list)
+node_t* cll_get_previous(circ_list_t* list)
 {
     return(list->head = list->head->prev);
 }
 
-void* cll_get_actual_data(list_t* list)
+void* cll_get_actual(circ_list_t* list)
 {
     return list->head->element;
 }
 
-void cll_goto_head(list_t* list)
+void cll_goto_head(circ_list_t* list)
 {
     while(list->head != list->tail)
     {
@@ -230,7 +230,7 @@ void cll_goto_head(list_t* list)
     list->head = list->head->next;
 }
 
-void cll_goto_tail(list_t* list)
+void cll_goto_tail(circ_list_t* list)
 {
     while(list->head != list->tail)
     {
@@ -245,7 +245,7 @@ void cll_goto_tail(list_t* list)
  * been successfully removed from the `list`, a negative
  * value otherwise.
  */
-int	cll_remove_node(list_t* list, node_t* node)
+int	cll_remove_node(circ_list_t* list, node_t* node)
 {
   node_t* found = cll_find_node(list, node);
   

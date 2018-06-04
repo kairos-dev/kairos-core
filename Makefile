@@ -6,4 +6,4 @@
 PROJECT_NAME := KairOS
 
 include $(IDF_PATH)/make/project.mk
-
+# EXTRA_COMPONENT_DIRS += main/modules/sh1106
