@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "audio.h"
+#include "hal_audio.h"
 
 esp_err_t audio_init(void)
 {
