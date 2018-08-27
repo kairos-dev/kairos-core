@@ -33,6 +33,8 @@ Now you can write your apps as you wish, or run the default apps.
 
 Comming soon...
 
+Copy **lvgl_component.mk** to: Libs/lvgl.
+
 ## Strategy
 
 Coming soon...
