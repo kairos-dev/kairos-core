@@ -7,7 +7,5 @@
 # please read the ESP-IDF documents if you need to do this.
 #
 
-#CFLAGS :=
-#COMPONENT_DEPENDS :=
-# COMPONENT_ADD_INCLUDEDIRS := .
-# COMPONENT_SRCDIRS := .
+COMPONENT_SRCDIRS := . Audio Bluetooth Display Input Power Storage WiFi 
+COMPONENT_ADD_INCLUDEDIRS := $(COMPONENT_SRCDIRS)

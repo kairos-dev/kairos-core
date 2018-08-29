@@ -1,7 +1,10 @@
 /**
  * @file lv_conf.h
- * 
+ *
  */
+#include <stdint.h>
+
+#if 1 /*Remove this to enable the content (Delete the last #endif too!)*/
 
 #ifndef LV_CONF_H
 #define LV_CONF_H
@@ -12,7 +15,7 @@
 
 /* Memory size which will be used by the library
  * to store the graphical objects and other data */
-#define LV_MEM_CUSTOM      0                /*1: use custom malloc/free, 0: use the built-in lv_mem_alloc/lv_mem_free*/
+#define LV_MEM_CUSTOM      1                /*1: use custom malloc/free, 0: use the built-in lv_mem_alloc/lv_mem_free*/
 #if LV_MEM_CUSTOM == 0
 #define LV_MEM_SIZE    (32U * 1024U)        /*Size memory used by `lv_mem_alloc` in bytes (>= 2kB)*/
 #define LV_MEM_ATTR                         /*Complier prefix for big array declaration*/
@@ -28,15 +31,15 @@
  *===================*/
 
 /* Horizontal and vertical resolution of the library.*/
-#define LV_HOR_RES          (320)
-#define LV_VER_RES          (240)
-#define LV_DPI              100
+#define LV_HOR_RES          (128)
+#define LV_VER_RES          (64)
+#define LV_DPI              (72)
 
 /* Size of VDB (Virtual Display Buffer: the internal graphics buffer).
  * Required for buffered drawing, opacity and anti-aliasing
  * VDB makes the double buffering, you don't need to deal with it!
  * Typical size: ~1/10 screen */
-#define LV_VDB_SIZE         (20 * LV_HOR_RES)  /*Size of VDB in pixel count (1/10 screen size is good for first)*/
+#define LV_VDB_SIZE         (0 * LV_HOR_RES)  /*Size of VDB in pixel count (1/10 screen size is good for first)*/
 #define LV_VDB_ADR          0                  /*Place VDB to a specific address (e.g. in external RAM) (0: allocate automatically into RAM)*/
 
 /* Use two Virtual Display buffers (VDB) parallelize rendering and flushing (optional)
@@ -45,7 +48,7 @@
 #define LV_VDB2_ADR         0       /*Place VDB2 to a specific address (e.g. in external RAM) (0: allocate automatically into RAM)*/
 
 /* Enable anti-aliasing (lines, and radiuses will be smoothed) */
-#define LV_ANTIALIAS        1       /*1: Enable anti-aliasing*/
+#define LV_ANTIALIAS        0       /*1: Enable anti-aliasing*/
 
 /*Screen refresh settings*/
 #define LV_REFR_PERIOD      50    /*Screen refresh period in milliseconds*/
@@ -64,7 +67,7 @@
 #define LV_INDEV_LONG_PRESS_REP_TIME    100                    /*Repeated trigger period in long press [ms] */
 
 /*Color settings*/
-#define LV_COLOR_DEPTH     16                     /*Color depth: 1/8/16/24*/
+#define LV_COLOR_DEPTH     1                     /*Color depth: 1/8/16/24*/
 #define LV_COLOR_TRANSP    LV_COLOR_LIME          /*Images pixels with this color will not be drawn (with chroma keying)*/
 
 /*Text settings*/
@@ -79,9 +82,27 @@
 #define USE_LV_REAL_DRAW        1               /*1: Enable function which draw directly to the frame buffer instead of VDB (required if LV_VDB_SIZE = 0)*/
 #define USE_LV_FILESYSTEM       1               /*1: Enable file system (required by images*/
 
-/*Compiler attributes*/
-#define LV_ATTRIBUTE_TICK_INC                 /* Define a custom attribute to tick increment function */
-#define LV_ATTRIBUTE_TASK_HANDLER
+/*Compiler settings*/
+#define LV_ATTRIBUTE_TICK_INC				 __attribute__((section(".iram1.text")))   	/* Define a custom attribute to `lv_tick_inc` function */
+#define LV_ATTRIBUTE_TASK_HANDLER		 __attribute__((section(".iram1.text"))) 		/* Define a custom attribute to `lv_task_handler` function */
+#define LV_COMPILER_VLA_SUPPORTED    0			/* 1: Variable length array is supported. (In Visual studio it is not supported)*/
+#define LV_COMPILER_NON_CONST_INIT_SUPPORTED 0	/* 1: Initialization with non constant values are supported (In Visual studio it is not supported)*/
+//#define _CRT_SECURE_NO_WARNINGS			    /* Visual Studio needs it to use `strcpy`, `sprintf` etc*/
+
+/*Log settings*/
+#define USE_LV_LOG		1	/*Enable/disable the log module*/
+#if USE_LV_LOG
+/* How important log should be added:
+ * LV_LOG_LEVEL_TRACE		A lot of logs to give detailed information
+ * LV_LOG_LEVEL_INFO		Log important events
+ * LV_LOG_LEVEL_WARN		Log if something unwanted happened but didn't caused problem
+ * LV_LOG_LEVEL_ERROR		Only critical issue, when the system may fail
+ */
+#define LV_LOG_LEVEL	LV_LOG_LEVEL_INFO
+/* 1: Print the log with 'printf'; 0: user need to register a callback*/
+
+#define LV_LOG_PRINTF	0
+#endif  /*USE_LV_LOG*/
 
 /*================
  *  THEME USAGE
@@ -101,28 +122,38 @@
 /* More info about fonts: https://littlevgl.com/basics#fonts
  * To enable a built-in font use 1,2,4 or 8 values
  * which will determine the bit-per-pixel */
-#define LV_FONT_DEFAULT        &lv_font_dejavu_20     /*Always set a default font from the built-in fonts*/
-
-#define USE_LV_FONT_DEJAVU_10              0
+#define USE_LV_FONT_DEJAVU_10              1
 #define USE_LV_FONT_DEJAVU_10_LATIN_SUP    0
 #define USE_LV_FONT_DEJAVU_10_CYRILLIC     0
-#define USE_LV_FONT_SYMBOL_10              0
+#define USE_LV_FONT_SYMBOL_10              1
 
-#define USE_LV_FONT_DEJAVU_20              4
+#define USE_LV_FONT_DEJAVU_20              1
 #define USE_LV_FONT_DEJAVU_20_LATIN_SUP    0
 #define USE_LV_FONT_DEJAVU_20_CYRILLIC     0
-#define USE_LV_FONT_SYMBOL_20              4
+#define USE_LV_FONT_SYMBOL_20              1
 
-#define USE_LV_FONT_DEJAVU_30              0
+#define USE_LV_FONT_DEJAVU_30              1
 #define USE_LV_FONT_DEJAVU_30_LATIN_SUP    0
 #define USE_LV_FONT_DEJAVU_30_CYRILLIC     0
-#define USE_LV_FONT_SYMBOL_30              0
+#define USE_LV_FONT_SYMBOL_30              1
 
-#define USE_LV_FONT_DEJAVU_40              0
+#define USE_LV_FONT_DEJAVU_40              1
 #define USE_LV_FONT_DEJAVU_40_LATIN_SUP    0
 #define USE_LV_FONT_DEJAVU_40_CYRILLIC     0
-#define USE_LV_FONT_SYMBOL_40              0
+#define USE_LV_FONT_SYMBOL_40              1
 
+#define USE_LV_FONT_MONOSPACE_8			   1
+
+/* Optionally declare your custom fonts here.
+ * You can use these fonts as defult font too
+ * and they will be avialale globally. E.g.
+ * #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(my_font_1) \
+ *						          LV_FONT_DECLARE(my_font_2) \
+ */
+
+#ifndef LV_FONT_DEFAULT
+#define LV_FONT_DEFAULT        &lv_font_dejavu_20     /*Always set a default font from the built-in fonts*/
+#endif
 /*===================
  *  LV_OBJ SETTINGS
  *==================*/
@@ -130,7 +161,7 @@
 #define LV_OBJ_FREE_PTR         1           /*Enable the free pointer attribute*/
 
 /*==================
- *  LV OBJ X USAGE 
+ *  LV OBJ X USAGE
  *================*/
 /*
  * Documentation of the object types: https://littlevgl.com/object-types
@@ -151,6 +182,9 @@
 
 /*Line (dependencies: -*/
 #define USE_LV_LINE     1
+
+/*Arc (dependencies: -)*/
+#define USE_LV_ARC      1
 
 /*******************
  * Container objects
@@ -200,6 +234,16 @@
 #define LV_TA_PWD_SHOW_TIME     1500    /*ms*/
 #endif
 
+/*Calendar (dependencies: -)*/
+#define USE_LV_CALENDAR 1
+
+/*Preload (dependencies: arc)*/
+#define USE_LV_PRELOAD      1
+#if USE_LV_PRELOAD != 0
+#define LV_PRELOAD_DEF_ARC_LENGTH   60      /*[deg]*/
+#define LV_PRELOAD_DEF_SPIN_TIME    1000    /*[ms]*/
+#endif
+
 /*************************
  * User input objects
  *************************/
@@ -240,4 +284,14 @@
 /*Switch (dependencies: lv_slider)*/
 #define USE_LV_SW       1
 
+/*************************
+ * Non-user section
+ *************************/
+#ifdef _MSC_VER                               /* Disable warnings for Visual Studio*/
+# define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #endif /*LV_CONF_H*/
+
+
+#endif /*Remove this to enable the content*/

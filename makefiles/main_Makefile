@@ -1,0 +1,9 @@
+PROJECT_NAME := project_name
+
+# EXTRA_COMPONENTS = lvgl extras/i2c
+
+EXTRA_COMPONENT_DIRS :=	$(abspath KairOS) 
+
+# include ../../common.mk
+
+include $(IDF_PATH)/make/project.mk
