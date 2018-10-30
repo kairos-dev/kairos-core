@@ -15,7 +15,7 @@ Under develompent...
 
 # Description
 
-KairOS is an open source embedded operating system based on [FreeRTOS](https://www.freertos.org) kernel, meant to be used on embedded devices. Actually, KairOS only works on ESP32 microcontroller, but probably we will port to other devices such as Texas Instruments ARM M4, STM32, and Nordic microcontrollers.
+KairOS is a simple open source embedded operating system based on [FreeRTOS](https://www.freertos.org) kernel, meant to be used on embedded devices. Actually, KairOS only works on ESP32 microcontroller, but probably we will port to other devices such as Texas Instruments ARM M4, STM32, and Nordic microcontrollers.
 
 ## KairOS Files Architecture
 
@@ -24,6 +24,7 @@ The KairOS Architecture is arranged in the scheme showed below:
 | drivers | > | hal | > | lib | > | res |
 |:-------:|:--:|:---:|:--:|:---:|:--:|:---:|
 | Code you wrote to run your hardware | | KairOS hardware Abstraction | | KairOS libraries | | KairOS Application Framework |
+
 *The structure used may be changed in the future
 
 Basically, to run KairOS in your embedded system you will need to write the code for hardware elements such as bluetooth, display, touch driver, keypad, flash storage, wifi modules, and sensors. And that's it, KairOS is running.
