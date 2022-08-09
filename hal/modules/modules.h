@@ -6,6 +6,7 @@
 #include "drv/protocols/i2c.h"
 #include "hal/rtc/rtc.h"
 #include "hal/display/display.h"
+#include "hal/accelerometer/accelerometer.h"
 
 kairos_err_t init_modules(void);
 

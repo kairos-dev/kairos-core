@@ -11,6 +11,10 @@
 extern "C" {
 #endif
 #include "bma4.h"
+#include "def/common.h"
+#include "drv/protocols/i2c.h"
+
+#define I2C_FREQ_HZ 100000
 
 /**\name Chip ID of BMA423 sensor */
 #define BMA423_CHIP_ID                 UINT8_C(0x13)
@@ -1069,6 +1073,9 @@ int8_t bma423_double_tap_get_sensitivity(uint8_t *sensitivity, struct bma4_dev *
  * @retval BMA4_E_NULL_PTR - Error: Null pointer error
  */
 int8_t bma423_get_version_config(uint16_t *config_major, uint16_t *config_minor, struct bma4_dev *dev);
+
+
+kairos_err_t bma423_init_desc(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio);
 
 #ifdef __cplusplus
 }

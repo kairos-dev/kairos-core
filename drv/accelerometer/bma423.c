@@ -1,4 +1,5 @@
 #include "bma423.h"
+#include "drv/accelerometer/bma4_defs.h"
 
 /**\name Feature configuration file */
 const uint8_t bma423_config_file[] = {
@@ -1641,6 +1642,21 @@ int8_t bma423_get_version_config(uint16_t *config_major, uint16_t *config_minor,
     }
 
     return rslt;
+}
+
+kairos_err_t bma423_init_desc(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
+{
+    CHECK_ARG(dev);
+
+    dev->port = port;
+    dev->addr = BMA4_I2C_ADDR_PRIMARY;
+    dev->cfg.sda_io_num = sda_gpio;
+    dev->cfg.scl_io_num = scl_gpio;
+    dev->cfg.master.clk_speed = I2C_FREQ_HZ;
+
+    CHECK(i2c_dev_create_mutex(dev));
+
+    return KAIROS_ERR_OK;
 }
 
 /*! @endcond */
