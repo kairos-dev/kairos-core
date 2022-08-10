@@ -5,5 +5,6 @@ kairos_err_t init_modules(void){
   passed |= i2cdev_init();
   passed |= init_rtc();
   passed |= init_display();
+  passed |= init_accelerometer();
   return passed;
 }
